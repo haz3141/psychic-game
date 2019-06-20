@@ -6,10 +6,12 @@ let numGuesses = 9;
 let cpuChoice;
 let userGuess;
 
+let winsRef = document.getElementById('wins');
+
 // Random Letter Function
 function randLetter() {
-    const letters = ['q', 'w', 'e', 'r', 't', 'y'];
-    let letter = letters[Math.floor(Math.random() * letters.length)];
+    const alphabet = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm'];
+    let letter = alphabet[Math.floor(Math.random() * alphabet.length)];
     return letter;
 } 
 
@@ -20,6 +22,10 @@ function newGame() {
     cpuChoice = randLetter();
     numGuesses = 9;
     console.log('CPU: ' + cpuChoice);
+    document.querySelector('#wins').innerHTML = 'Wins: ' + wins;
+    document.querySelector('#losses').innerHTML = 'Losses: ' + losses;
+    document.querySelector('#guessesLeft').innerHTML = 'Guesses Left: ' + numGuesses;
+    document.querySelector('#guesses').innerHTML = 'Guesses: ' + userGuesses;
 }
 
 newGame();
@@ -28,7 +34,7 @@ newGame();
 document.onkeyup = function(event) {
     
     // Store user's guess
-    userGuess = event.key;
+    userGuess = event.key.toLowerCase();
     console.log('User: ' + userGuess);
     userGuesses.push(userGuess);
     console.log(userGuesses);
@@ -47,11 +53,14 @@ document.onkeyup = function(event) {
         // console.log('CPU: ' + cpuChoice);
         // numGuesses = 9;
 
-    } else if (userGuess !== cpuChoice && numGuesses > 0) {
+    } else if (numGuesses > 0) {
 
         console.log('Keep going');
         // numGuesses--;
         console.log('Guesses Left: ' + numGuesses);
+        document.querySelector('#guesses').innerHTML = 'Guesses: ' + userGuesses;
+        document.querySelector('#guessesLeft').innerHTML = 'Guesses Left: ' + numGuesses;
+
 
     } else {
 
