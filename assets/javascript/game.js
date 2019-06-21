@@ -5,8 +5,7 @@ let losses = 0;
 let numGuesses = 9;
 let cpuChoice;
 let userGuess;
-
-let winsRef = document.getElementById('wins');
+let repeatCheck;
 
 // Random Letter Function
 function randLetter() {
@@ -35,10 +34,16 @@ document.onkeyup = function(event) {
     
     // Store user's guess
     userGuess = event.key.toLowerCase();
-    console.log('User: ' + userGuess);
-    userGuesses.push(userGuess);
-    console.log(userGuesses);
-    numGuesses--;
+    repeatCheck = userGuesses.includes(userGuess);
+
+    // Check to see if letter is a repeat
+    if (repeatCheck === false) {
+        console.log('User: ' + userGuess);
+        userGuesses.push(userGuess);
+        console.log(userGuesses);
+        numGuesses--;
+    }
+    
 
     // Go through guesses 
     // Determine if winner
